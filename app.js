@@ -1,16 +1,13 @@
 (() => {
   'use strict';
   const themes = ['aurora','neon','clean','gold','mono'];
-  const iconNames = ['aurora','dark','light','gold','silver','flare','neon'];
+  const iconNames = ['aurora','gold','silver','light'];
   const themeLabels = {aurora:'Aurora',neon:'Neon',clean:'Clean',gold:'Gold',mono:'Silver'};
   const iconDescriptions = {
-    aurora:['Lumina Aurora','Lebendige Lichtreflexe, violette Tiefen und ein cineastischer Charakter.'],
-    dark:['Lumina Dark','Dunkles, fokussiertes Design mit klaren Cyan-Akzenten.'],
-    light:['Lumina Light','Minimalistisch, weich und hell – mit dezentem Blau und Violett.'],
-    gold:['Lumina Gold','Warmes Metallic-Finish für einen besonders eleganten Look.'],
-    silver:['Lumina Silver','Reduzierte silberne Konturen auf tiefem Schwarz.'],
-    flare:['Lumina Flare','Grafische Formen und dynamische Blau-Violett-Energie.'],
-    neon:['Lumina Neon','Ein elektrischer Lichtimpuls in Cyan und Blau.']
+    aurora:['Lumina Aurora','Das aktuelle Lumina Signature-Icon: samtige Violetttöne, sanfte Lichtreflexe und eine irisierende Kameralinse.'],
+    gold:['Lumina Gold','Edle Goldkonturen auf mattem Schwarz. Für einen luxuriösen, warmen Look.'],
+    silver:['Lumina Silver','Silberne Kamerakonturen und eine ruhige, elegante Dunkelheit.'],
+    light:['Lumina Light','Klares, helles Design mit kühlem Blau und einer ruhigen Kameralinse.']
   };
   const pick = (id) => document.getElementById(id);
   const getSaved = (key) => { try { return localStorage.getItem(key); } catch { return null; } };
@@ -78,6 +75,42 @@
     document.querySelectorAll('.stage-dot').forEach((dot,i) => dot.classList.toggle('is-active',i===index));
   }));
 
+
+  // Seasonal motif preview. Never alters the website's persistent primary brand icon.
+  const seasonal = {
+    halloween: ['🎃 Halloween','Mystische Nacht, violette Schatten & warmes Kürbislicht.'],
+    autumn: ['🍂 Autumn','Goldene Blätter, Cozy-Outfits und warme Filmlooks.'],
+    winter: ['❄️ Winter','Eisblau, Frost-Effekte und klare Winterstimmung.'],
+    spring: ['🌸 Spring','Pastell, Blütenzauber und frische Lichtakzente.'],
+    summer: ['☀️ Summer','Sonnenlicht, blaue Weite und sommerliche Looks.'],
+    christmas: ['🎄 Christmas','Festliches Rot, Tannengrün und goldene Lichtpunkte.']
+  };
+  document.querySelectorAll('[data-season]').forEach(btn => btn.addEventListener('click', () => {
+    const season = btn.dataset.season;
+    if (!Object.prototype.hasOwnProperty.call(seasonal, season)) return;
+    const pic = pick('season-selected-img'), title=pick('season-selected-name'), desc=pick('season-selected-description');
+    if(pic){pic.src=`assets/icon-season-${season}.webp`;pic.alt=`Lumina ${season} Icon als große Vorschau`;}
+    if(title)title.textContent=seasonal[season][0];
+    if(desc)desc.textContent=seasonal[season][1];
+    document.querySelectorAll('[data-season]').forEach(el=>{el.classList.toggle('is-selected',el===btn);el.setAttribute('aria-pressed',String(el===btn));});
+  }));
+  const recipeFields=['recipe-outfit','recipe-light','recipe-style'];
+  const updateRecipe=()=>{
+    const labels=recipeFields.map(id=>pick(id)?.selectedOptions?.[0]?.textContent||'');
+    const result=pick('recipe-result');if(result)result.textContent=labels.join(' · ');
+  };
+  recipeFields.forEach(id=>pick(id)?.addEventListener('change',updateRecipe));
+  pick('recipe-copy')?.addEventListener('click', async ()=>{
+    const values=recipeFields.map(id=>pick(id)?.value||'');
+    const prompt=`Edit the supplied photo. Preserve the subject's facial features, identity and natural proportions. Create ${values[0]} with ${values[1]} and a visual style of ${values[2]}. Keep details coherent and realistic unless a clearly artistic result is requested.`;
+    try{
+      if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');
+      await navigator.clipboard.writeText(prompt);
+      if(pick('recipe-feedback'))pick('recipe-feedback').textContent='Prompt-Idee in die Zwischenablage kopiert.';
+    }catch{
+      const output=pick('recipe-feedback');if(output)output.textContent='Kopieren nicht möglich. Bitte verwende einen Browser über HTTPS oder localhost.';
+    }
+  });
   const year = pick('current-year'); if(year)year.textContent=String(new Date().getFullYear());
   if('IntersectionObserver' in window){
     const observer=new IntersectionObserver(entries => {entries.forEach(entry => {if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});},{rootMargin:'0px 0px -30px 0px',threshold:.06});

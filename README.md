@@ -1,49 +1,49 @@
-# Lumina AI – Premium Landingpage
+# Lumina AI – Premium Landingpage 2026
 
-Fertige statische, responsive Landingpage für die Lumina AI Foto- & Video-KI-App. Verwendet die vom Nutzer gelieferten Screenshots, App-Icons und zwei seiner Promo-MP4s sowie die in der Unterhaltung erstellten Gold-/Silber-Varianten.
+Fertige **statische**, responsive Website als ZIP. Basierend auf den echten Lumina-AI-Screenshots, Nutzerbildern und Promo-MP4s. Kein Build-Prozess und keine externen Fonts, CDN-Skripte oder Analytics.
 
-## Inhalt
+## Dateien
 
-- `index.html` – Startseite mit Hero, Feature-Karten, interaktiver App-Vorschau, Icon-Selector, zwei Demo-/Promo-Videos, FAQ und CTA
-- `styles.css` – Responsive Premium-Design mit fünf Website-Themes (Aurora, Neon, Clean, Gold, Silver)
-- `app.js` – Design- und Icon-Wechsel, App-Vorschau-Tabs, Mobile-Menü und Animationen
-- `datenschutz.html` – Entwurf Datenschutzerklärung mit nachvollziehbarer Trennung von Website und geplanter App
-- `impressum.html` – Entwurf Impressum (muss ergänzt werden)
-- `assets/` – lokal gehostete WebP-Screenshots, Icons, Promo-Videos und Favicon
+- `index.html` – Premium-Landingpage, interaktive App-Screenshots, fünf Website-Farbwelten, **vier echte Haupt-Icon-Varianten** und **sechs saisonale Lumina-Icons**, Creative-Recipe-Demo, Promo-Videos, FAQ
+- `styles.css` – vollständige responsive UI, Dark/Light und Motion-Reduktion
+- `app.js` – Theme-Wechsel, Icons, interaktive saisonale Kollektionen, Recipe-Demo, App-Vorschau
+- `datenschutz.html` – Website-Datenschutz (Entwurf, Hosting fehlt noch)
+- `app-datenschutz.html` – **separater APP-Datenschutz-Entwurf** für die Play-Store-Vorbereitung; enthält absichtlich offene, wichtige Datenverarbeitungen
+- `impressum.html` – Impressum mit noch zu ergänzender vollständiger Straßenanschrift
+- `assets/` – lokale optimierte Icons, App-Screenshots, Vorschau-Videos und Social-Cover
 
-## Direkt lokal testen
+## Lokal testen
 
-`index.html` doppelklicken oder aus diesem Ordner einen lokalen Webserver starten:
+`index.html` öffnen oder im Ordner ausführen:
 
 ```sh
 python -m http.server 8000
 ```
 
-Dann `http://localhost:8000` öffnen. Für GitHub Pages alles ins Repository hochladen und Pages in den Repository-Einstellungen aktivieren.
+Danach `http://localhost:8000` öffnen.
 
-## Vor Veröffentlichung verpflichtend prüfen
+## GitHub Pages
 
-1. In `impressum.html` und `datenschutz.html` **vollen bürgerlichen Namen und ladungsfähige Anschrift (Straße + Hausnummer)** ergänzen. Aktuell steht absichtlich ein deutlich sichtbarer Platzhalter.
-2. In `datenschutz.html` den tatsächlichen Hoster und dessen Log-Speicherung sowie ggf. internationalen Datentransfer konkret angeben.
-3. Für die echte **Lumina AI App** verwendete Dienste prüfen und dokumentieren: Anmeldung (z. B. Google/Firebase, falls tatsächlich vorhanden), Bild- und Video-Uploads, KI-Provider, Datenspeicherung, öffentliche Profile, mögliche Zahlungen/Credits, Löschfristen, Übermittlungen in Drittländer, Nutzungsrechte/Training. Die hier gelieferten App-Angaben sind keine vollständige Live-App-Erklärung.
-4. E-Mail-Kontakt und tatsächliche Domain bei Veröffentlichung testen. Aktuell gibt es **keine erfundenen App-Store-URLs**, stattdessen Kontakt/Launch-Anfrage per `mailto:`.
-5. Prüfen, ob Features in der geplanten App wie gezeigt funktionieren. Teaser-Videos sind **Promo-Clips**, keine Behauptung, dass KI-Generierungen in ihnen gezeigt werden.
-6. Falls künftig Tracking, Analytics, Werbenetzwerke, externe Fonts, Zahlungsdienste oder Formulare hinzukommen, Datenschutzerklärung und gegebenenfalls Einwilligungsmanagement aktualisieren.
-7. Für eine optimale Social-Media-Vorschau die relative `og:image`-Angabe in `index.html` nach Domain-Festlegung auf eine absolute HTTPS-URL zu `assets/social-cover.webp` umstellen.
-8. Vor Livegang rechtliche Prüfung durchführen lassen; dieser Entwurf stellt keine anwaltliche Beratung dar.
+1. **Dateien aus diesem Ordner**, nicht nur den äußeren ZIP-Ordner, ins Repository-Hauptverzeichnis hochladen.
+2. GitHub → Settings → Pages → Deploy from branch → main / root auswählen.
+3. Die Startseite ist dann unter `https://BENUTZER.github.io/REPOSITORY/` verfügbar.
+4. Relative Pfade funktionieren auch in einem GitHub-Pages-Unterordner.
+5. Impressum, Datenschutz und App-Datenschutz **vor Freigabe fertigstellen**, anschließend Links erneut testen.
+6. Bei eigener Domain Social-Meta-URL (`og:image`) auf absolute HTTPS-URL setzen.
 
-## Technische Besonderheiten
+## WICHTIG – Vor Veröffentlichung
 
-- Funktioniert ohne Framework und ohne Build-Prozess; keine Third-Party-Skripte, keine Google-Fonts, keine Analytics, keine externen Video-Embeds.
-- CSS und JavaScript lokal; Auswahl der fünf Website-Themes und des Markenicons wird in `localStorage` gespeichert (`lumina_landing_theme`, `lumina_landing_icon`).
-- Das **Landingpage-Theme-System ist unabhängig vom React ThemeContext der eigentlichen App** und greift nicht in die bestehende App ein.
-- Responsives Layout bis 320px; reduced-motion Support, Tastatur-Navigation und einfache Screenreader-Labels.
-- Videos werden nicht vorab vollständig heruntergeladen (`preload="none"`); sie werden im lokalen Assets-Ordner ausgeliefert.
+- **Straße und Hausnummer** in Impressum, Website- und App-Datenschutz ergänzen. Mitteilungspflichten nach § 5 DDG beachten.
+- Tatsächlichen **Hoster**, Speicherfristen der Server-Logs, ggf. weitere Kontaktangaben und rechtliche Unternehmensform verifizieren.
+- `app-datenschutz.html` ist **keine finale Datenschutzerklärung**. Angaben über Login, Google/Firebase, KI-Provider, Bild- und Videoverarbeitung, Uploads, Credits/Käufe, Galerie/öffentliche Profile, Crash-/Analytics-Tools, Datenübermittlung, Speicher- und Löschfristen anhand des **App-Codes** prüfen und ergänzen. Die Angaben im Play-Console-Datensicherheitsformular müssen dazu passen.
+- Der zur Prüfung genutzte Cloud-Run-Demolink war nicht verlässlich erreichbar. Es wurde deshalb **kein unbestätigter App-Store- oder Demo-Link** eingebaut; der CTA führt zum E-Mail-Kontakt.
+- Jahreszeiten-Vorlagen und Creative Recipe sind als **Konzept-Preview** markiert, da echte Backend-Implementierung nicht gesichert ist. Bestehende App-Screenshots und Videos sind Originale; Demo-Grafiken nie als echte KI-Outputs ausgeben.
+- Neue Tracking-, Analytics-, Werbe- oder Zahlungsdienste würden rechtliche Anpassungen und ggf. Zustimmungslösungen erfordern.
 
-## Allgemeine Quellen zur rechtlichen Prüfung
+## Technik und Daten
 
-- § 5 DDG: https://www.gesetze-im-internet.de/ddg/__5.html
-- Art. 13 DSGVO – Leitfaden IHK: https://www.ihk.de/rhein-neckar/recht/datenschutz-itrecht-internetrecht/datenschutz/datenschutzerklaerung-4502986
-- LfDI Niedersachsen – Webseiten & Apps: https://www.lfd.niedersachsen.de/dsgvo/informationen_fur_betreiber_von_webseiten/informationen-fur-betreiber-von-webseiten-und-apps-digitale-dienste-164589.html
+Die Website selbst speichert `lumina_landing_theme` und `lumina_landing_icon` lokal für die Darstellung. Die saisonale Auswahl wird nicht gespeichert. Der Creative Recipe Builder erzeugt lokal Text zur optionalen Zwischenablage; keine Daten werden versendet.
 
-© 2026 Lumina AI / Flondy – User-provided project materials.
+Referenzen: [§ 5 DDG](https://www.gesetze-im-internet.de/ddg/__5.html), [DSGVO Art. 13](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679), [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+
+Stand: 27.10.2026
